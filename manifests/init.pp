@@ -40,7 +40,8 @@ class cakeCore {
     file { 'Ensure Database Configuration Present':
         ensure => present,
         path => "${siteRoot}/Config/database.php",
-        owner   => root, group => root,
+        owner   => 'vagrant', 
+        group => 'vagrant',
         content => template("cakecore/database.erb"),
         replace => no
     }
