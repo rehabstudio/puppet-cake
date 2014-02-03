@@ -1,5 +1,4 @@
-#$nginxCakePath = "PHP_VALUE include_path=.:/usr/share/php:/usr/share/pear:${ymlconfig[cake][corePath]}"
-
+# Simple class that pulls down the cake core and registers it in PATH. Also creates some preliminary files and folders, including the database.php and logs
 class cakeCore {
 
     exec { 'Download CakePHP Core':
