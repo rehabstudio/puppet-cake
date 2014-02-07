@@ -5,9 +5,9 @@ class DATABASE_CONFIG {
         'datasource' => 'Database/Mysql',
         'persistent' => 'false',
         'host'       => 'localhost',
-        'login'      => "<%= @ymlconfig['database']['user'] %>",
-        'password'   => "<%= @ymlconfig['database']['pass'] %>",
-        'database'   => "<%= @ymlconfig['database']['name'] %>",
+        'login'      => "<%= @ymlconfig['mysql']['user'] %>",
+        'password'   => "<%= @ymlconfig['mysql']['pass'] %>",
+        'database'   => "<%= @ymlconfig['mysql']['name'] %>",
         'prefix'     => '',
         'encoding'   => 'utf8'
     );
