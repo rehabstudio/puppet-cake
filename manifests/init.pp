@@ -7,15 +7,17 @@ class cakeCore {
         require => Package['git-core'];
     }
 
-    file { [
-        "${siteRoot}/Config",
-        "${siteRoot}/tmp",
-        "${siteRoot}/tmp/logs",
-        "${siteRoot}/tmp/cache",
-        "${siteRoot}/tmp/cache/models",
-        "${siteRoot}/tmp/cache/persistent",
-        "${siteRoot}/tmp/cache/views"
-    ]:
+    file { 
+      'Install cake project directories':
+        path => [
+            "${siteRoot}/Config",
+            "${siteRoot}/tmp",
+            "${siteRoot}/tmp/logs",
+            "${siteRoot}/tmp/cache",
+            "${siteRoot}/tmp/cache/models",
+            "${siteRoot}/tmp/cache/persistent",
+            "${siteRoot}/tmp/cache/views"
+        ],
         ensure => directory,
         mode => 0777,
         recurse => true
