@@ -2,21 +2,21 @@
 class cakeCore {
 
     exec { 'Download CakePHP Core':
-        command => "git clone -b ${ymlconfig[cake][repoTag]} https://github.com/cakephp/cakephp.git ${ymlconfig[cake][corePath]}",
-        creates => $ymlconfig['cake']['corePath'],
+        command => "git clone -b ${settings::ymlconfig[cake][repoTag]} https://github.com/cakephp/cakephp.git ${ymlconfig[cake][corePath]}",
+        creates => $settings::ymlconfig['cake']['corePath'],
         require => Package['git-core'];
     }
 
     file { 
       'Install cake project directories':
         path => [
-            "${siteRoot}/Config",
-            "${siteRoot}/tmp",
-            "${siteRoot}/tmp/logs",
-            "${siteRoot}/tmp/cache",
-            "${siteRoot}/tmp/cache/models",
-            "${siteRoot}/tmp/cache/persistent",
-            "${siteRoot}/tmp/cache/views"
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/Config",
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/tmp",
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/tmp/logs",
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/tmp/cache",
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/tmp/cache/models",
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/tmp/cache/persistent",
+            "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/tmp/cache/views"
         ],
         ensure => directory,
         mode => 0777,
@@ -28,20 +28,20 @@ class cakeCore {
         group => 'vagrant',
         mode => 0755,
         owner => 'vagrant',
-        path => $ymlconfig['cake']['corePath'],
+        path => $settings::ymlconfig['cake']['corePath'],
         recurse => true,
         require => Exec['Download CakePHP Core']
     }
 
     file_line { 'Adding CakePHP Core to Path':
         path => '/home/vagrant/.bashrc',
-        line => "export PATH=${ymlconfig[cake][corePath]}/lib/Cake/Console:\$PATH # Adding CakePHP core to path.",
+        line => "export PATH=${settings::ymlconfig[cake][corePath]}/lib/Cake/Console:\$PATH # Adding CakePHP core to path.",
         require => Exec['Download CakePHP Core']
     }
 
     file { 'Ensure Database Configuration Present':
         ensure => present,
-        path => "${siteRoot}/Config/database.php",
+        path => "${settings::ymlconfig[env][docRoot]}${settings::ymlconfig[env][siteRoot]}/Config/database.php",
         owner   => 'vagrant', 
         group => 'vagrant',
         content => template("cakecore/database.erb"),
