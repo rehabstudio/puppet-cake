@@ -8,15 +8,14 @@ class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $db_user, $db_pass, $db_name )
         require => Package['git-core'];
     }
 
-    file { 
-        [
+    file { [
             "${appRoot}/Config",
             "${appRoot}/tmp",
             "${appRoot}/tmp/logs",
             "${appRoot}/tmp/cache",
             "${appRoot}/tmp/cache/models",
             "${appRoot}/tmp/cache/persistent",
-            "${appRoot}/tmp/cache/views"
+            "${appRoot}/tmp/cache/views",
         ]:
         ensure => directory,
         mode => 0777,
