@@ -1,5 +1,5 @@
 # Simple class that pulls down the cake core and registers it in PATH. Also creates some preliminary files and folders, including the database.php and logs
-class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $dbTemplate, $ymlconfig ) 
+class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $db_user, $db_pass, $db_name ) 
 {
 
     exec { 'Download CakePHP Core':
@@ -45,7 +45,7 @@ class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $dbTemplate, $ymlconfig )
         path => "${appRoot}/Config/database.php",
         owner   => 'vagrant', 
         group => 'vagrant',
-        content => template("${dbTemplate}"),
+        content => template("cakecore/database.erb"),
         replace => no
     }
 
