@@ -9,8 +9,7 @@ class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $db_user, $db_pass, $db_name )
     }
 
     file { 
-      'Install cake project directories':
-        path => [
+        [
             "${appRoot}/Config",
             "${appRoot}/tmp",
             "${appRoot}/tmp/logs",
@@ -18,7 +17,7 @@ class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $db_user, $db_pass, $db_name )
             "${appRoot}/tmp/cache/models",
             "${appRoot}/tmp/cache/persistent",
             "${appRoot}/tmp/cache/views"
-        ],
+        ]:
         ensure => directory,
         mode => 0777,
         recurse => true
