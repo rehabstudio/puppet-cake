@@ -1,9 +1,6 @@
 # Simple class that pulls down the cake core and registers it in PATH. Also creates some preliminary files and folders, including the database.php and logs
-class cakeCore (
-    $appRoot = $cakeCore::params::appRoot,
-    $cakeRoot = $cakeCore::params::cakeRoot,
-    $cakeTag = $cakeCore::params::cakeTag
-    ) inherits cakeCore::params {
+class cakeCore ( $appRoot, $cakeRoot, $cakeTag ) 
+{
 
     exec { 'Download CakePHP Core':
         command => "git clone -b ${cakeTag} https://github.com/cakephp/cakephp.git ${cakeRoot}",
