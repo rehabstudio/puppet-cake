@@ -5,7 +5,7 @@ class cakeCore ( $appRoot, $cakeRoot, $cakeTag, $db_user, $db_pass, $db_name )
     exec { 'Download CakePHP Core':
         command => "git clone -b ${cakeTag} https://github.com/cakephp/cakephp.git ${cakeRoot}",
         creates => $cakeRoot,
-        require => Package['git-core'];
+        require => Package['git'];
     }
 
     file { [
